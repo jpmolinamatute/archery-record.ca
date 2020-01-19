@@ -1,0 +1,17 @@
+<template name="addsesion">
+    <input id="asession-range_name" type="text" placeholder="Range Name">
+    <input id="asession-distance" type="number" placeholder="Distance" min="0" max="70">
+    <select id="asession-targetid">
+        <option value="">Target Name</option>
+        {{#each targets}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <select id="asession-bowid">
+        <option value="">Bow Name</option>
+        {{#each bows}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <button type="button" id="asession-save">Add</button>
+</template>

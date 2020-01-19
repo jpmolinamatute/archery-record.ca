@@ -1,0 +1,22 @@
+<template name="input">
+    {{#if Template.subscriptionsReady}}
+        {{#if notsessions}}
+            {{> addsesion}}
+        {{else}}
+            {{#if question}}
+                {{#with thissession}}
+                    <div id="use-session">
+                        <p>Do You want to use open session started at {{range_name}} on {{transformDate created_on}}</p>
+                        <button type="button" value="yes">Yes</button>
+                        <button type="button" value="no">No</button>
+                    </div>
+                {{/with}}
+            {{else}}
+                {{> displayscore sessionid=thissession._id}}
+                {{> addrounds thissession}}
+            {{/if}}
+        {{/if}}
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>

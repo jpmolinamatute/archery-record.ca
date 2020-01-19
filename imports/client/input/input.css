@@ -1,0 +1,10 @@
+div#use-session {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    height: 78px;
+    margin-top: -39px;
+    width: 468px;
+    left: 50%;
+    margin-left: -234px;
+}

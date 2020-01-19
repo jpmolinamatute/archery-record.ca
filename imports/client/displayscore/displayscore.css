@@ -1,0 +1,29 @@
+table#display-score {
+    width: 100%;
+    position: absolute;
+    height: 50px;
+}
+
+table#display-score td {
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: none;
+}
+
+table#display-score th {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: none;
+}
+
+table#display-score thead {
+    background-color: red;
+}
+
+table#display-score tbody {
+    margin-top: -2px;
+    background-color: green;
+}

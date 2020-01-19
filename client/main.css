@@ -1,0 +1,40 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+div#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 39.2px;
+}
+
+div#body {
+    height: calc(100% - 39.2px);
+    position: relative;
+}
+
+div#login-buttons {
+    margin: 5px;
+}
+
+div#login-buttons {
+    order: 1;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

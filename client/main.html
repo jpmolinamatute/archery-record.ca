@@ -1,0 +1,20 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <title>Archery</title>
+    <meta name="viewport" content="width=823, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+    <div id="header">
+        {{> loginButtons}}
+    </div>
+    <div id="body">
+        {{#if user}}
+            {{> Template.dynamic template=main}}
+        {{else}}
+            <p>Please login using your Google Credentials</p>
+        {{/if}}
+    </div>
+</body>

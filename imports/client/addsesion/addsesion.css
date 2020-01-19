@@ -1,0 +1,7 @@
+input#asession-range_name,
+input#asession-distance,
+select#asession-targetid,
+select#asession-bowid,
+button#asession-save {
+    height: 34px;
+}

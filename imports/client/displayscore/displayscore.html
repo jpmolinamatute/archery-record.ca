@@ -1,0 +1,24 @@
+<template name="displayscore">
+ <table id="display-score">
+     <thead>
+         <tr>
+             <th>Round No</th>
+             <th>Valid Shots</th>
+             <th>Invalid Shots</th>
+             <th>Total Shots</th>
+             <th>Points</th>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             {{#with display}}
+                <td>{{roundnum}}</td>
+                <td>{{valid}}</td>
+                <td>{{invalid}}</td>
+                <td>{{total}}</td>
+                <td>{{points}}</td>
+             {{/with}}
+         </tr>
+     </tbody>
+ </table>
+</template>

@@ -1,0 +1,31 @@
+div#round-form {
+    position: absolute;
+    width: 100%;
+    background-color: pink;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 50px
+}
+
+div#round-form>input {
+    margin-left: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: black 1px solid;
+    padding-left: 15px;
+}
+
+div#round-controls {
+    top: 114px;
+    left: 50%;
+    margin-left: -189px;
+    background-color: red;
+    position: absolute;
+    width: 378px;
+    height: 47px;
+}
+
+div#round-controls>button {
+    margin: 10px;
+}
