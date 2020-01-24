@@ -1,10 +1,10 @@
-table#display-score {
+div#display-score {
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     height: 50px;
 }
 
-table#display-score td {
+div#display-score div.cell {
     text-align: center;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
@@ -19,11 +19,11 @@ table#display-score th {
     border-bottom: none;
 }
 
-table#display-score thead {
+/* table#display-score thead {
     background-color: red;
 }
 
 table#display-score tbody {
     margin-top: -2px;
     background-color: green;
-}
+} */

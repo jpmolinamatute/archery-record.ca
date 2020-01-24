@@ -1,24 +1,24 @@
 <template name="displayscore">
- <table id="display-score">
-     <thead>
-         <tr>
-             <th>Round No</th>
-             <th>Valid Shots</th>
-             <th>Invalid Shots</th>
-             <th>Total Shots</th>
-             <th>Points</th>
-         </tr>
-     </thead>
-     <tbody>
-         <tr>
+ <div id="display-score" class="div-table">
+     <div class="div-thead">
+         <div class="div-row">
+             <div class="div-cell">Round No</div>
+             <div class="div-cell">Valid Shots</div>
+             <div class="div-cell">Invalid Shots</div>
+             <div class="div-cell">Total Shots</div>
+             <div class="div-cell">Points</div>
+         </div>
+     </div>
+     <div class="div-tbody">
+         <div class="div-row">
              {{#with display}}
-                <td>{{roundnum}}</td>
-                <td>{{valid}}</td>
-                <td>{{invalid}}</td>
-                <td>{{total}}</td>
-                <td>{{points}}</td>
+                <div class="div-cell">{{roundnum}}</div>
+                <div class="div-cell">{{valid}}</div>
+                <div class="div-cell">{{invalid}}</div>
+                <div class="div-cell">{{total}}</div>
+                <div class="div-cell">{{points}}</div>
              {{/with}}
-         </tr>
-     </tbody>
- </table>
+         </div>
+    </div>
+ </div>
 </template>

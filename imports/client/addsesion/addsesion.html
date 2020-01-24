@@ -1,17 +1,44 @@
 <template name="addsesion">
-    <input id="asession-range_name" type="text" placeholder="Range Name">
-    <input id="asession-distance" type="number" placeholder="Distance" min="0" max="70">
-    <select id="asession-targetid">
-        <option value="">Target Name</option>
-        {{#each targets}}
-            <option value="{{_id}}">{{name}}</option>
-        {{/each}}
-    </select>
-    <select id="asession-bowid">
-        <option value="">Bow Name</option>
-        {{#each bows}}
-            <option value="{{_id}}">{{name}}</option>
-        {{/each}}
-    </select>
-    <button type="button" id="asession-save">Add</button>
+    <div id="asession">
+        <div class="row">
+            <div class="col">
+                <label for="asession-range_name">Range Name</label>
+                <input id="asession-range_name" type="text" class="form-control">
+            </div>
+            <div class="col">
+                <label for="asession-distance">Distance</label>
+                <input id="asession-distance" type="number" class="form-control" min="3" max="70">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="asession-targetid">Target Name</label>
+                <select id="asession-targetid" class="form-control">
+                    <option value=""></option>
+                    {{#each targets}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col">
+                <label for="asession-targetid">Bow Name</label>
+                <select id="asession-bowid" class="form-control">
+                    <option value=""></option>
+                    {{#each bows}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="asession-distance">No Shots</label>
+                <input id="asession-shots" type="number" class="form-control" value="6" min="1" max="8">
+            </div>
+            <div class="col">
+                <button type="button" id="asession-save" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
 </template>

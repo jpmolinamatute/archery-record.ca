@@ -10,7 +10,3 @@ Template.body.helpers({
         return 'input';
     }
 });
-
-// Template.body.onCreated(() => {
-//     Meteor.loginWithGoogle();
-// });

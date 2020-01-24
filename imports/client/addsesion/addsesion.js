@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import './addsesion.css';
 import './addsesion.html';
 import { TARGETDB, BOWSDB, SESSIONSDB } from '../../both/db';
+import { askSession } from '../globals';
 
 Template.addsesion.events({
     'click button#asession-save': (event, templateInstance) => {
@@ -10,16 +11,19 @@ Template.addsesion.events({
         const distance = templateInstance.find('input#asession-distance');
         const targetid = templateInstance.find('select#asession-targetid');
         const bowid = templateInstance.find('select#asession-bowid');
+        const nushot = templateInstance.find('input#asession-shots');
 
         const bowvalue = typeof bowid.value === 'string' && bowid.value.length > 0 ? bowid.value : false;
         const targetvalue = typeof targetid.value === 'string' && targetid.value.length > 0 ? targetid.value : false;
         const rangevalue = typeof rangeName.value === 'string' && rangeName.value.length > 0 ? rangeName.value : false;
-        const distancevalue = parseInt(distance.value, 10) > 0 ? parseInt(distance.value, 10) : false;
+        const distancevalue = parseInt(distance.value, 10) > 1 && parseInt(nushot.value, 10) <= 70 ? parseInt(distance.value, 10) : false;
+        const nushotvalue = parseInt(nushot.value, 10) >= 1 && parseInt(nushot.value, 10) <= 8 ? parseInt(nushot.value, 10) : false;
 
-        if (bowvalue && targetvalue && rangevalue && distancevalue) {
+        if (bowvalue && targetvalue && rangevalue && distancevalue && nushotvalue) {
             SESSIONSDB.insert({
                 distance: distancevalue,
                 isopen: true,
+                nushot: nushotvalue,
                 range_name: rangevalue,
                 userid: Meteor.userId(),
                 targetid: targetvalue,
@@ -29,10 +33,12 @@ Template.addsesion.events({
                 if (error) {
                     console.error(error);
                 } else if (typeof id === 'string') {
+                    askSession.set(false);
                     rangeName.value = '';
                     distance.value = '';
                     targetid.value = '';
                     bowid.value = '';
+                    nushot.value = '';
                 }
             });
         }
@@ -48,10 +54,4 @@ Template.addsesion.helpers({
     targets() {
         return TARGETDB.find({ userid: Meteor.userId() });
     }
-});
-
-
-Template.addsesion.onCreated(function addsesiononCreated() {
-    this.subscribe('userbows');
-    this.subscribe('usertargets');
 });

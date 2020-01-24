@@ -5,7 +5,7 @@ WHERE="$1"
 if [[ $WHERE == "in" ]]; then
     export MONGO_URL="mongodb://archeryuser:8O6OIdvenq@home-in.com:57017/archerydb"
 elif [[ $WHERE == "out" ]]; then
-    export MONGO_URL="mongodb://archeryuser:8O6OIdvenq@home-in.com:57017/archerydb"
+    export MONGO_URL="mongodb://archeryuser:8O6OIdvenq@home-out.com:57017/archerydb"
 else
     echo "Error: please provide where" >&2
     exit 2

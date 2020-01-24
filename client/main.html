@@ -3,7 +3,8 @@
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Archery</title>
-    <meta name="viewport" content="width=823, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         {{#if user}}
             {{> Template.dynamic template=main}}
         {{else}}
-            <p>Please login using your Google Credentials</p>
+            <p id="ask-login">Please login using your Google Credentials</p>
         {{/if}}
     </div>
 </body>

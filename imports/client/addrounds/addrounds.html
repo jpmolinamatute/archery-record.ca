@@ -1,14 +1,19 @@
 <template name="addrounds">
-    {{#if Template.subscriptionsReady}}
-        <div id="round-form">
-            {{# each rings}}
-                <input type="number" data-id="{{_id}}" min="0" max="99" placeholder="0" style="background-color: {{color}};">
-            {{/each}}
+<div id="round-form" class="div-table">
+    <div class="div-tbody">
+        {{#each list}}
+            {{>shot .}}
+        {{/each}}
+    </div>
+    <div class="div-tfoot">
+        <div class="div-row">
+            <div class="div-cell">
+                <button type="button" id="add-round" class="btn btn-primary">Add</button>
+            </div>
+            <div class="div-cell">
+                <button type="button" id="end-session" class="btn btn-secondary">End<br>Session</button>
+            </div>
         </div>
-        <div id="round-controls">
-            <button type="button" id="time-round">Time it!</button>
-            <button type="button" id="add-round">Add</button>
-            <button type="button" id="end-session">End Session</button>
-        </div>
-    {{/if}}
+    </div>
+</div>
 </template>

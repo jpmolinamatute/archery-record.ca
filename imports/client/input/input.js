@@ -8,20 +8,22 @@ import '../loading/loading';
 import '../addrounds/addrounds';
 import '../addsesion/addsesion';
 import '../displayscore/displayscore';
+import { askSession } from '../globals';
+
 
 Template.input.events({
-    'click div#use-session>button': (event, templateInstance) => {
+    'click div#use-session>button': (event) => {
         const answer = event.currentTarget.value;
         if (answer === 'no') {
             Meteor.call('closeAllSessions', (error) => {
                 if (error) {
                     console.error(error);
                 } else {
-                    templateInstance.asktouse.set(false);
+                    askSession.set(false);
                 }
             });
         } else {
-            templateInstance.asktouse.set(false);
+            askSession.set(false);
         }
 
         event.stopPropagation();
@@ -33,8 +35,7 @@ Template.input.helpers({
         return SESSIONSDB.find({ userid: Meteor.userId(), isopen: true }).count() === 0;
     },
     question() {
-        const input = Template.instance();
-        return input.asktouse.get();
+        return askSession.get();
     },
     transformDate(someDate) {
         let result = false;
@@ -53,5 +54,4 @@ Template.input.onCreated(function sessionsonCreated() {
     this.subscribe('usersessions');
     this.subscribe('userbows');
     this.subscribe('usertargets');
-    this.asktouse = new ReactiveVar(true);
 });

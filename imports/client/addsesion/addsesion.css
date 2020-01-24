@@ -1,7 +1,7 @@
-input#asession-range_name,
-input#asession-distance,
-select#asession-targetid,
-select#asession-bowid,
 button#asession-save {
-    height: 34px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 55px;
+    margin-left: -22.5px;
 }

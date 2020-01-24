@@ -1,13 +1,13 @@
 import { Template } from 'meteor/templating';
 import './addrounds.css';
 import './addrounds.html';
+import '../shot/shot';
 import { TARGETDB, ROUNDSDB } from '../../both/db';
 
 Template.addrounds.events({
     'click button#add-round': (event, templateInstance) => {
-        const shots = templateInstance.findAll('input');
-        if (Array.isArray(shots)) {
-            const rings = TARGETDB.findOne({ _id: templateInstance.data.targetid }).rings;
+        const selects = templateInstance.findAll('select');
+        if (Array.isArray(selects)) {
             const save = {
                 userid: Meteor.userId(),
                 sessionid: templateInstance.data._id,
@@ -18,33 +18,31 @@ Template.addrounds.events({
                 shots: []
             };
 
-            shots.forEach((shot) => {
-                const shotNum = parseInt(shot.value, 10) > 0 ? parseInt(shot.value, 10) : 0;
-                if (shotNum > 0) {
-                    const ring = rings.find((item) => item._id === shot.dataset.id);
-                    save.points = ring.point * shotNum;
-                    if (ring.point > 0) {
-                        save.valids += shotNum;
+            selects.forEach((shot) => {
+                const point = parseInt(shot.value, 10);
+                if (!isNaN(point)) {
+                    save.points += point;
+                    if (point > 0) {
+                        save.valids += 1;
                     } else {
-                        save.invalids += shotNum;
+                        save.invalids += 1;
                     }
                 }
-                save.shots.push({
-                    ringid: shot.dataset.id,
-                    quantity: shotNum
-                });
+                save.shots.push(point);
             });
             ROUNDSDB.insert(save, (error, id) => {
                 if (error) {
                     console.error(error);
                 } else if (typeof id === 'string') {
                     templateInstance.datetime = undefined;
-                    shots.forEach((shot) => {
+                    selects.forEach((shot) => {
                         shot.value = '';
                     });
                 }
             });
         }
+
+
         event.stopPropagation();
     },
     'click button#end-session': (event) => {
@@ -58,15 +56,24 @@ Template.addrounds.events({
 });
 
 Template.addrounds.helpers({
-    rings() {
-        let rings = false;
+    list() {
         const session = Template.instance().data;
+        const dumbList = [];
         if (session && session.targetid) {
-            rings = TARGETDB.findOne({ _id: session.targetid }).rings;
+            const rings = TARGETDB.findOne({ _id: session.targetid }, {
+                fields: { 'rings.point': 1, _id: 0 },
+                reactive: false
+            }).rings;
+            for (let i = 1; i <= session.nushot; i += 2) {
+                const shot1 = i;
+                const shot2 = i + 1 <= session.nushot ? i + 1 : false;
+                dumbList.push({
+                    shot1,
+                    shot2,
+                    rings
+                });
+            }
         }
-        return rings;
+        return dumbList;
     }
-});
-Template.addrounds.onCreated(function addroundsonCreated() {
-    this.subscribe('usertargets');
 });

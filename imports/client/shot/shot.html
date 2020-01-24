@@ -1,0 +1,32 @@
+<template name="shot">
+    <div class="div-row">
+        {{#with data}}
+            <div class="div-cell">
+                <span>{{shot1}}</span>
+                <select>
+                    <option value="">Points</option>
+                    <option value="-1">M2</option>
+                    <option value="0">M1</option>
+                    {{#each rings}}
+                        <option value={{point}}>{{point}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            {{#if shot2}}
+                <div class="div-cell">
+                    <span>{{shot2}}</span>
+                    <select>
+                        <option value="">Points</option>
+                        <option value="-1">Miss 2</option>
+                        <option value="0">Miss 1</option>
+                        {{#each rings}}
+                            <option value={{point}}>{{point}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            {{else}}
+                <div class="div-cell"></div>
+            {{/if}}
+        {{/with}}
+    </div>
+</template>
