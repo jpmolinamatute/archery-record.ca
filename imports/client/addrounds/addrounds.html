@@ -1,18 +1,14 @@
 <template name="addrounds">
-<div id="round-form" class="div-table">
-    <div class="div-tbody">
-        {{#each list}}
-            {{>shot .}}
-        {{/each}}
-    </div>
-    <div class="div-tfoot">
-        <div class="div-row">
-            <div class="div-cell">
-                <button type="button" id="add-round" class="btn btn-primary">Add</button>
-            </div>
-            <div class="div-cell">
-                <button type="button" id="end-session" class="btn btn-secondary">End<br>Session</button>
-            </div>
+<div id="round-form">
+    {{#each list}}
+        {{>shot .}}
+    {{/each}}
+    <div class="row">
+        <div class="col">
+            <button type="button" id="add-round" class="btn btn-primary">Add</button>
+        </div>
+        <div class="col">
+            <button type="button" id="end-session" class="btn btn-secondary">End<br>Session</button>
         </div>
     </div>
 </div>

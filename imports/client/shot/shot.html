@@ -1,9 +1,11 @@
 <template name="shot">
-    <div class="div-row">
+    <div class="row">
         {{#with data}}
-            <div class="div-cell">
-                <span>{{shot1}}</span>
-                <select>
+            <div class="input-group col">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="shot-{{shot1}}">{{shot1}}. </label>
+                </div>
+                <select id="shot-{{shot1}}" class="custom-select">
                     <option value="">Points</option>
                     <option value="-1">M2</option>
                     <option value="0">M1</option>
@@ -13,9 +15,11 @@
                 </select>
             </div>
             {{#if shot2}}
-                <div class="div-cell">
-                    <span>{{shot2}}</span>
-                    <select>
+                <div class="input-group col">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="shot-{{shot2}}">{{shot2}}. </label>
+                    </div>
+                    <select id="shot-{{shot2}}" class="custom-select">
                         <option value="">Points</option>
                         <option value="-1">Miss 2</option>
                         <option value="0">Miss 1</option>

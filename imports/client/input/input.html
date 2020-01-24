@@ -1,6 +1,6 @@
 <template name="input">
     {{#if Template.subscriptionsReady}}
-        {{#if notsessions}}
+        {{#unless thissession}}
             {{> addsesion}}
         {{else}}
             {{#if question}}
@@ -15,7 +15,7 @@
                 {{> displayscore sessionid=thissession._id}}
                 {{> addrounds thissession}}
             {{/if}}
-        {{/if}}
+        {{/unless}}
     {{else}}
         {{> loading}}
     {{/if}}

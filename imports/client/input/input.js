@@ -31,9 +31,6 @@ Template.input.events({
 });
 
 Template.input.helpers({
-    notsessions() {
-        return SESSIONSDB.find({ userid: Meteor.userId(), isopen: true }).count() === 0;
-    },
     question() {
         return askSession.get();
     },
