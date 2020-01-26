@@ -1,3 +1,34 @@
 <template name="output">
- 
+    {{#if Template.subscriptionsReady}}
+        {{#if hasSession}}
+            <table class=table>
+                <thead>
+                    <tr>
+                        <th>Round<br>No</th>
+                        {{#each turns}}
+                            <th>Shot<br>{{.}}</th>
+                        {{/each}}
+                        <th>Total<br>Points</th>
+                        <th>Valid<br>Shots</th>
+                        <th>Invalid<br>Shots</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each rounds}}
+                        <tr>
+                            <td>{{filterRound @index}}</td>
+                            {{#each shots}}
+                                <td>{{filterShots .}}</td>
+                            {{/each}}
+                            <td>{{points}}</td>
+                            <td>{{valids}}</td>
+                            <td>{{invalids}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <p id="create-session">Please create a session and shut some arrows</p>
+        {{/if}}
+    {{/if}}
 </template>

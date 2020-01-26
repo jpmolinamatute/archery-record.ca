@@ -27,7 +27,6 @@ p#ask-login {
     left: 50%;
     margin-left: -154.5px;
     margin-top: -9.5px;
-
 }
 
 div#login-buttons {
@@ -67,4 +66,11 @@ div.div-tbody {
 
 div.div-tfoot {
     display: table-footer-group;
+}
+
+p.title-section {
+    margin-top: 15px;
+    font-size: 40px;
+    color: blue;
+    text-align: center;
 }

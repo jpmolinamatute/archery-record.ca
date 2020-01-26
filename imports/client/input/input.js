@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
 import './input.css';
 import './input.html';
 import { SESSIONSDB } from '../../both/db';

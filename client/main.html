@@ -9,7 +9,10 @@
 
 <body>
     <div id="header">
-        {{> loginButtons}}
+        {{> login}}
+        {{#if user}}
+            {{> controls}}
+        {{/if}}
     </div>
     <div id="body">
         {{#if user}}

@@ -1,0 +1,16 @@
+<template name="controls">
+    {{#if isTemplate 'input'}}
+        <button type="button" id="change-template" data-show="output" class="btn btn-secondary">
+            <i class="fas fa-chart-line"></i>
+        </button>
+        <button type="button" id="close-session" class="btn btn-secondary" title="Close Session">
+            <i class="fas fa-window-close"></i>
+        </button>
+    {{else}}
+        {{#if isTemplate 'output'}}
+        <button type="button" id="change-template" data-show="input" class="btn btn-success">
+            <i class="fas fa-edit"></i>
+        </button>
+        {{/if}}
+    {{/if}}
+</template>

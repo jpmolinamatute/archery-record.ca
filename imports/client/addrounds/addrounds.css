@@ -1,11 +1,14 @@
 div#round-form {
-    width: 300px;
-    margin: 5px auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: center;
 }
 
-div#round-form div.col {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+div#round-form>div.col {
+    flex: 0 0 80px;
 }
+
+
+/* margin-left: calc(50% - 54.4px);
+margin-top: 15px; */

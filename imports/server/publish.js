@@ -59,3 +59,12 @@ Meteor.publish('userbows', function userbows() {
     }
     return BOWSDB.find({ userid: this.userId }, { sort: { name: 1 } });
 });
+
+Meteor.publish('userData', function userData() {
+    if (!this.userId) {
+        return this.ready();
+    }
+    return Meteor.users.find({ _id: this.userId }, {
+        fields: { 'services.google.picture': 1 }
+    });
+});

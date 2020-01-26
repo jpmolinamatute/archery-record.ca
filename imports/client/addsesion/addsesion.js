@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import './addsesion.css';
 import './addsesion.html';
+import '@fortawesome/fontawesome-free';
+import '@fortawesome/fontawesome-free-solid';
 import { TARGETDB, BOWSDB, SESSIONSDB } from '../../both/db';
 import { askSession } from '../globals';
 

@@ -1,0 +1,12 @@
+<template name="login">
+    {{#with user}}
+        <img src="{{services.google.picture}}" alt="picture" height="25" width="25">
+        <button id="logout" type="button" class="btn btn-link" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    {{else}}
+        <button id="login"  type="button" class="btn btn-link" title="Login">
+            <i class="fas fa-sign-in-alt"></i>
+        </button>
+    {{/with}}
+</template>
