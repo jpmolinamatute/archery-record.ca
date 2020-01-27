@@ -10,17 +10,14 @@ Template.output.events({
 });
 
 Template.output.helpers({
-    turns() {
-        const dumpList = [];
+    nushot() {
+        let num = 0;
         const session = Template.instance().session.get();
         if (typeof session === 'object') {
-            const length = session.nushot;
-            for (let i = 1; i <= length; i += 1) {
-                dumpList.push(i);
-            }
+            num = session.nushot;
         }
 
-        return dumpList;
+        return num;
     },
     hasSession() {
         return Template.instance().session.get();
@@ -37,6 +34,10 @@ Template.output.helpers({
         }
         return newShot;
     },
+    accumulative(total) {
+        Template.instance().accumulative += total;
+        return Template.instance().accumulative;
+    },
     rounds() {
         const session = Template.instance().session.get();
         if (typeof session === 'object') {
@@ -49,6 +50,7 @@ Template.output.helpers({
 
 Template.output.onCreated(function outputonCreated() {
     this.session = new ReactiveVar(false);
+    this.accumulative = 0;
     this.subscribe('usersessions', (error) => {
         if (error) {
             console.error(error);

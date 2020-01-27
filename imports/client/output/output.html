@@ -1,14 +1,13 @@
 <template name="output">
     {{#if Template.subscriptionsReady}}
         {{#if hasSession}}
-            <table class=table>
+            <table id="session-score" class="table">
                 <thead>
                     <tr>
-                        <th>Round<br>No</th>
-                        {{#each turns}}
-                            <th>Shot<br>{{.}}</th>
-                        {{/each}}
-                        <th>Total<br>Points</th>
+                        <th class="right-border">Round<br>No</th>
+                        <th colspan="{{nushot}}" class="center">{{nushot}} arrows per end</th>
+                        <th class="left-border">End</th>
+                        <th class="right-border">Cum</th>
                         <th>Valid<br>Shots</th>
                         <th>Invalid<br>Shots</th>
                     </tr>
@@ -16,11 +15,12 @@
                 <tbody>
                     {{#each rounds}}
                         <tr>
-                            <td>{{filterRound @index}}</td>
+                            <td class="right-border">{{filterRound @index}}</td>
                             {{#each shots}}
                                 <td>{{filterShots .}}</td>
                             {{/each}}
-                            <td>{{points}}</td>
+                            <td class="left-border">{{points}}</td>
+                            <td class="right-border">{{accumulative points}}</td>
                             <td>{{valids}}</td>
                             <td>{{invalids}}</td>
                         </tr>

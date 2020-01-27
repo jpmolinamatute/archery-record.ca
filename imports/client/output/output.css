@@ -1,3 +1,22 @@
+table#session-score th.center {
+    text-align: center;
+}
+
+
+table#session-score th.right-border,
+table#session-score td.right-border {
+    border-right: 2px solid #dee2e6;
+}
+
+table#session-score th.left-border,
+table#session-score td.left-border {
+    border-left: 2px solid #dee2e6;
+}
+
+table#session-score tbody tr:last-child td {
+    border-bottom: 2px solid #dee2e6;
+}
+
 p#create-session {
     position: absolute;
     width: 334px;
