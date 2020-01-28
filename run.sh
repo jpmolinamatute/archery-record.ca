@@ -10,7 +10,7 @@ elif [[ $WHERE == "out" ]]; then
     export ROOT_URL="http://juapa-archery.ca:3000"
 elif [[ $WHERE == "dev" ]]; then
     export MONGO_URL='mongodb+srv://archeryuser:jUNAKpbW4F7O52QE@cluster0-mcrup.mongodb.net/archery?retryWrites=true&w=majority'
-    export ROOT_URL='http://archery-record.ca/dev'
+    export ROOT_URL='http://archery-record.ca/dev/'
     export PATH="/usr/local/bin:${PATH}"
 elif [[ -z $WHERE ]]; then
     echo "Error: please provide where" >&2
