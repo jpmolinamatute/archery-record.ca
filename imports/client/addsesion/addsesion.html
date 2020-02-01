@@ -1,17 +1,17 @@
 <template name="addsesion">
-    <p class="title-section">Session</p>
-    <div class="row add-sesion">
-        <div class="col">
+    <!-- <p class="title-section">Session</p> -->
+    <div class="add-sesion">
+        <div class="flex-col">
             <label for="asession-range_name">Range Name</label>
             <input id="asession-range_name" type="text" class="form-control">
         </div>
-        <div class="col">
+        <div class="flex-col">
             <label for="asession-distance">Distance</label>
             <input id="asession-distance" type="number" class="form-control" min="3" max="70">
         </div>
     </div>
-    <div class="row add-sesion">
-        <div class="col">
+    <div class="add-sesion">
+        <div class="flex-col">
             <label for="asession-targetid">Target Name</label>
             <select id="asession-targetid" class="form-control">
                 <option value=""></option>
@@ -20,7 +20,7 @@
                 {{/each}}
             </select>
         </div>
-        <div class="col">
+        <div class="flex-col">
             <label for="asession-targetid">Bow Name</label>
             <select id="asession-bowid" class="form-control">
                 <option value=""></option>
@@ -30,12 +30,12 @@
             </select>
         </div>
     </div>
-    <div class="row add-sesion">
-        <div class="col">
+    <div class="add-sesion">
+        <div class="flex-col">
             <label for="asession-distance">No Shots</label>
             <input id="asession-shots" type="number" class="form-control" value="6" min="1" max="8">
         </div>
-        <div class="col">
+        <div class="flex-col">
             <button type="button" id="asession-save" class="btn btn-link" title="Add Session">
                 <i class="fas fa-plus"></i>
             </button>

@@ -13,5 +13,11 @@ Template.body.helpers({
     },
     main() {
         return templateToDisplay.get();
+    },
+    w() {
+        return window.innerWidth;
+    },
+    h() {
+        return window.innerHeight;
     }
 });

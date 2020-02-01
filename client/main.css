@@ -12,11 +12,14 @@ body {
 div#header {
     position: relative;
     height: 39.2px;
+    background-color: black;
 }
 
 div#body {
     height: calc(100% - 39.2px);
     position: relative;
+    background-color: red;
+    width: 100%;
 }
 
 p#ask-login {
@@ -69,7 +72,7 @@ div.div-tfoot {
 }
 
 p.title-section {
-    margin-top: 15px;
+    /* margin-top: 15px; */
     font-size: 40px;
     color: blue;
     text-align: center;
