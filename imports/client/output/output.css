@@ -26,3 +26,9 @@ p#create-session {
     margin-left: -167px;
     margin-top: -9.5px;
 }
+div#session-score-wrapper{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

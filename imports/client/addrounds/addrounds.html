@@ -1,15 +1,14 @@
 <template name="addrounds">
-<p class="title-section">Round</p>
-<div id="round-form">
-    {{#each list}}
-        <div class="col" style="order: {{i}};">
-            <input type="number" min="0" max="{{max}}" class="form-control" tabindex="{{i}}" data-index="{{i}}">
+    <div id="round-form">
+        {{#each list}}
+            <div class="col" style="order: {{i}};">
+                <input type="number" min="0" max="{{max}}" class="form-control" tabindex="{{i}}" data-index="{{i}}">
+            </div>
+        {{/each}}
+        <div class="col" style="order: {{buttonorder}};">
+            <button type="button" id="add-round" class="btn btn-link" title="Add Round">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
-    {{/each}}
-    <div class="col" style="order: {{buttonorder}};">
-        <button type="button" id="add-round" class="btn btn-link" title="Add Round">
-            <i class="fas fa-plus"></i>
-        </button>
     </div>
-</div>
 </template>

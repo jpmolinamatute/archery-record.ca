@@ -1,32 +1,34 @@
 <template name="output">
     {{#if Template.subscriptionsReady}}
         {{#if hasSession}}
-            <table id="session-score" class="table">
-                <thead>
-                    <tr>
-                        <th class="right-border">Round<br>No</th>
-                        <th colspan="{{nushot}}" class="center">{{nushot}} arrows per end</th>
-                        <th class="left-border">End</th>
-                        <th class="right-border">Cum</th>
-                        <th>Valid<br>Shots</th>
-                        <th>Invalid<br>Shots</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each rounds}}
+            <div id="session-score-wrapper">
+                <table id="session-score" class="table">
+                    <thead>
                         <tr>
-                            <td class="right-border">{{filterRound @index}}</td>
-                            {{#each shots}}
-                                <td>{{filterShots .}}</td>
-                            {{/each}}
-                            <td class="left-border">{{points}}</td>
-                            <td class="right-border">{{accumulative points}}</td>
-                            <td>{{valids}}</td>
-                            <td>{{invalids}}</td>
+                            <th class="right-border">Round<br>No</th>
+                            <th colspan="{{nushot}}" class="center">{{nushot}} arrows per end</th>
+                            <th class="left-border">End</th>
+                            <th class="right-border">Cum</th>
+                            <th>Valid<br>Shots</th>
+                            <th>Invalid<br>Shots</th>
                         </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {{#each rounds}}
+                            <tr>
+                                <td class="right-border">{{filterRound @index}}</td>
+                                {{#each shots}}
+                                    <td>{{filterShots .}}</td>
+                                {{/each}}
+                                <td class="left-border">{{points}}</td>
+                                <td class="right-border">{{accumulative points}}</td>
+                                <td>{{valids}}</td>
+                                <td>{{invalids}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
         {{else}}
             <p id="create-session">Please create a session and shut some arrows</p>
         {{/if}}

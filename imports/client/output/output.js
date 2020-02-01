@@ -5,6 +5,7 @@ import './output.css';
 import './output.html';
 import { SESSIONSDB, ROUNDSDB } from '../../both/db';
 
+
 Template.output.events({
 
 });
