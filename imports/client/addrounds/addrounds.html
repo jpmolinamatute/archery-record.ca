@@ -1,14 +1,21 @@
 <template name="addrounds">
-    <div id="round-form">
-        {{#each list}}
-            <div class="col" style="order: {{i}};">
-                <input type="number" min="0" max="{{max}}" class="form-control" tabindex="{{i}}" data-index="{{i}}">
-            </div>
-        {{/each}}
-        <div class="col" style="order: {{buttonorder}};">
-            <button type="button" id="add-round" class="btn btn-link" title="Add Round">
-                <i class="fas fa-plus"></i>
-            </button>
+    {{#if addround}}
+        <div id="round-form">
+            {{#each list}}
+                <div class="col" style="order: {{i}};">
+                    <input type="number" min="{{min}}" max="{{max}}" class="form-control" tabindex="{{i}}" data-index="{{i}}">
+                </div>
+            {{/each}}
         </div>
-    </div>
+        <button type="button" id="add-round" class="btn" title="Add Round">
+            <i class="fas fa-plus"></i>
+        </button>
+    {{else}}
+        <div id="want-continue">
+            <p>You have reached your goal of <span>{{rounds}}</span> rounds.<br>
+            Do you want to continue?</p>
+            <button type="button" class="btn btn-primary" value="yes">Yes</button>
+            <button type="button" class="btn btn-default" value="no">No</button>
+        </div>
+    {{/if}}
 </template>

@@ -1,11 +1,15 @@
 <template name="controls">
     {{#if isTemplate 'input'}}
-        <button type="button" id="change-template" data-show="output" class="btn btn-secondary">
-            <i class="fas fa-chart-line"></i>
-        </button>
-        <button type="button" id="close-session" class="btn btn-secondary" title="Close Session">
-            <i class="fas fa-window-close"></i>
-        </button>
+        {{#if sessionid }}
+            <button type="button" id="change-template" data-show="output" class="btn btn-secondary">
+                <i class="fas fa-chart-line"></i>
+            </button>
+            {{#if hasRound sessionid}}
+                <button type="button" id="close-session" class="btn btn-secondary" title="Close Session">
+                    <i class="fas fa-window-close"></i>
+                </button>
+            {{/if}}
+        {{/if}}
     {{else}}
         {{#if isTemplate 'output'}}
         <button type="button" id="change-template" data-show="input" class="btn btn-success">

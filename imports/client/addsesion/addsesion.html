@@ -10,7 +10,7 @@
             <input id="asession-distance" type="number" class="form-control" min="3" max="70">
         </div>
     </div>
-    <div class="add-sesion">
+    <!-- <div class="add-sesion">
         <div class="flex-col">
             <label for="asession-targetid">Target Name</label>
             <select id="asession-targetid" class="form-control">
@@ -29,16 +29,18 @@
                 {{/each}}
             </select>
         </div>
-    </div>
+    </div> -->
     <div class="add-sesion">
         <div class="flex-col">
-            <label for="asession-distance">No Shots</label>
-            <input id="asession-shots" type="number" class="form-control" value="6" min="1" max="8">
+            <label for="asession-rounds">No Rounds</label>
+            <input id="asession-rounds" type="number" class="form-control" value="10" min="1">
         </div>
         <div class="flex-col">
-            <button type="button" id="asession-save" class="btn btn-link" title="Add Session">
-                <i class="fas fa-plus"></i>
-            </button>
+            <label for="asession-shots">No Shots</label>
+            <input id="asession-shots" type="number" class="form-control" value="3" min="1" max="8">
         </div>
     </div>
+    <button type="button" id="asession-save" class="btn" title="Add Session">
+        <i class="fas fa-plus"></i>
+    </button>
 </template>

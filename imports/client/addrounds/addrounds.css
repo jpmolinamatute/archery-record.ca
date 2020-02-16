@@ -10,5 +10,23 @@ div#round-form>div.col {
 }
 
 
-/* margin-left: calc(50% - 54.4px);
-margin-top: 15px; */
+button#add-round {
+    margin-top: 15px;
+    width: calc(100% - 30px);
+    margin-left: 15px;
+}
+
+div#want-continue {
+    text-align: center;
+    width: 310px;
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 96px;
+}
+
+
+div#want-continue p span {
+    font-weight: bolder;
+    font-size: 18px;
+}

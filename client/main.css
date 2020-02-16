@@ -21,6 +21,36 @@ div#body {
     width: 100%;
 }
 
+div#rotate {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+
+    div#header,
+    div#body {
+        display: none;
+    }
+
+    div#rotate {
+        display: block;
+        width: 100%;
+
+    }
+
+    div#rotate p {
+        margin: 15px;
+        padding: 5px;
+        font-weight: bolder;
+        font-size: 18px;
+        background-color: #FFEEEE;
+        border-radius: 4px;
+        border: solid red 1px;
+    }
+}
+
+
+
 p#ask-login {
     position: absolute;
     width: 309px;
