@@ -2,7 +2,6 @@ table#session-score th.center {
     text-align: center;
 }
 
-
 table#session-score th.right-border,
 table#session-score td.right-border {
     border-right: 2px solid #dee2e6;
@@ -19,14 +18,11 @@ table#session-score tbody tr:last-child td {
 
 p#create-session {
     position: absolute;
-    width: 334px;
-    height: 19px;
-    top: 50%;
-    left: 50%;
-    margin-left: -167px;
-    margin-top: -9.5px;
+    top: calc(50% - 10px);
+    left: calc(50% - 86px);
 }
-div#session-score-wrapper{
+
+div#session-score-wrapper {
     width: 100%;
     height: 100%;
     overflow-y: auto;

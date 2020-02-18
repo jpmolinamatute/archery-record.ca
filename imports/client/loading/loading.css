@@ -1,11 +1,11 @@
 div#loading {
-    position: absolute;
     width: 100%;
     height: 100%;
 }
 
 div#loading p {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: calc(50% - 22.5px);
+    left: calc(50% - 15px);
+    font-size: 30px;
 }

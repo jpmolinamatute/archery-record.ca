@@ -7,7 +7,7 @@ import '../loading/loading';
 import '../addrounds/addrounds';
 import '../addsesion/addsesion';
 import '../displayscore/displayscore';
-import { askSession } from '../globals';
+import { askSession, formatDate } from '../globals';
 
 
 Template.input.events({
@@ -34,12 +34,7 @@ Template.input.helpers({
         return askSession.get();
     },
     transformDate(someDate) {
-        let result = false;
-        if (someDate instanceof Date) {
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            result = `${someDate.getDate()}/${months[someDate.getMonth()]}/${someDate.getFullYear()}`;
-        }
-        return result;
+        return formatDate(someDate);
     },
     thissession() {
         return SESSIONSDB.findOne({ userid: Meteor.userId(), isopen: true });
@@ -48,6 +43,6 @@ Template.input.helpers({
 
 Template.input.onCreated(function sessionsonCreated() {
     this.subscribe('usersessions');
-    this.subscribe('userbows');
-    this.subscribe('usertargets');
+    // this.subscribe('userbows');
+    // this.subscribe('usertargets');
 });

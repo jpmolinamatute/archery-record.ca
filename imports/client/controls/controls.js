@@ -1,12 +1,13 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { templateToDisplay } from '../globals';
-import { SESSIONSDB, ROUNDSDB } from '../../both/db';
+import { templateToDisplay, formatDate, outputSession } from '../globals';
+import { SESSIONSDB } from '../../both/db';
 import '@fortawesome/fontawesome-free';
 import '@fortawesome/fontawesome-free-solid';
 import './controls.css';
 import './controls.html';
+
 
 Template.controls.events({
     'click button#change-template': (event) => {
@@ -16,6 +17,9 @@ Template.controls.events({
     'click button#close-session': (event) => {
         Meteor.call('closeAllSessions');
         event.stopPropagation();
+    },
+    'change select#session-list': (event) => {
+        outputSession.set(event.currentTarget.value);
     }
 });
 
@@ -24,11 +28,18 @@ Template.controls.helpers({
         check(templateName, String);
         return templateToDisplay.get() === templateName;
     },
-    sessionid() {
+    hassessionopen() {
         const session = SESSIONSDB.findOne({ userid: Meteor.userId(), isopen: true });
-        return typeof session === 'object' ? session._id : false;
+        return typeof session === 'object';
     },
-    hasRound(sessionid) {
-        return ROUNDSDB.find({ sessionid }).count() > 0;
+    sessionList() {
+        return SESSIONSDB.find({ userid: Meteor.userId() }, { fields: { created_on: 1 } }).map((doc) => {
+            doc.dateFormatted = formatDate(doc.created_on);
+            return doc;
+        });
     }
+});
+
+Template.controls.onCreated(function controlsonCreated() {
+    this.subscribe('usersessions');
 });

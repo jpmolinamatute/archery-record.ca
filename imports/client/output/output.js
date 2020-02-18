@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
 import './output.css';
 import './output.html';
-import { SESSIONSDB, ROUNDSDB } from '../../both/db';
+import { ROUNDSDB, SESSIONSDB } from '../../both/db';
+import { outputSession } from '../globals';
 
 
 Template.output.events({
@@ -13,15 +13,18 @@ Template.output.events({
 Template.output.helpers({
     nushot() {
         let num = 0;
-        const session = Template.instance().session.get();
-        if (typeof session === 'object') {
-            num = session.nushot;
+        const sessionid = outputSession.get();
+        if (typeof sessionid === 'string') {
+            const numTemp = SESSIONSDB.findOne({ _id: sessionid }, { fileds: { nushot: 1, _id: 0 }, reactive: false });
+            if (typeof numTemp === 'object') {
+                num = numTemp.nushot;
+            }
         }
 
         return num;
     },
     hasSession() {
-        return Template.instance().session.get();
+        return outputSession.get();
     },
     filterRound(round) {
         return round + 1;
@@ -40,9 +43,8 @@ Template.output.helpers({
         return Template.instance().accumulative;
     },
     rounds() {
-        const session = Template.instance().session.get();
-        if (typeof session === 'object') {
-            const sessionid = session._id;
+        const sessionid = outputSession.get();
+        if (typeof sessionid === 'string') {
             return ROUNDSDB.find({ userid: Meteor.userId(), sessionid });
         }
         return false;
@@ -50,22 +52,11 @@ Template.output.helpers({
 });
 
 Template.output.onCreated(function outputonCreated() {
-    this.session = new ReactiveVar(false);
     this.accumulative = 0;
-    this.subscribe('usersessions', (error) => {
-        if (error) {
-            console.error(error);
-        } else {
-            const session = SESSIONSDB.findOne({ userid: Meteor.userId(), isopen: true });
-            if (typeof session === 'object') {
-                this.session.set(session);
-            }
-        }
-    });
     this.autorun(() => {
-        const session = this.session.get();
-        if (typeof session === 'object') {
-            this.subscribe('userrounds', session._id);
+        const sessionid = outputSession.get();
+        if (typeof sessionid === 'string') {
+            this.subscribe('userrounds', sessionid);
         }
     });
 });

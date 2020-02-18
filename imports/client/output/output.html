@@ -3,14 +3,14 @@
         {{#if hasSession}}
             <div id="session-score-wrapper">
                 <table id="session-score" class="table">
-                    <thead>
+                    <thead class="thead-light">
                         <tr>
-                            <th class="right-border">Round<br>No</th>
-                            <th colspan="{{nushot}}" class="center">{{nushot}} arrows per end</th>
-                            <th class="left-border">End</th>
-                            <th class="right-border">Cum</th>
-                            <th>Valid<br>Shots</th>
-                            <th>Invalid<br>Shots</th>
+                            <th scope="col" class="right-border">Round<br>No</th>
+                            <th scope="col" colspan="{{nushot}}" class="center">{{nushot}} arrows per end</th>
+                            <th scope="col" class="left-border">End</th>
+                            <th scope="col" class="right-border">Cum</th>
+                            <th scope="col">Valid<br>Shots</th>
+                            <th scope="col">Invalid<br>Shots</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,7 @@
                 </table>
             </div>
         {{else}}
-            <p id="create-session">Please create a session and shut some arrows</p>
+            <p id="create-session">Please Select a session</p>
         {{/if}}
     {{/if}}
 </template>
