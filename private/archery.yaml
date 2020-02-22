@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Archery
+Parameters:
+  MONGO:
+    Description: Mongo URL.
+    Type: String
+Resources:
+  sg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: vpc-cfed0da4
+      GroupDescription: "This SG is being used by the archery server"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3003
+          ToPort: 3003
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 142.162.113.134/32
+      Tags:
+        - Key: Name
+          Value: "Archery Server SG"
+
+  ec2Instance11:
+    Type: AWS::EC2::Instance
+    Properties:
+      IamInstanceProfile: archery
+      DisableApiTermination: false
+      ImageId: ami-0e38b48473ea57778
+      InstanceType: t2.small
+      KeyName: PersonalAWS
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+
+          set -e
+
+          hostnamectl set-hostname archery-record.ca
+          yum -y update
+          yum install -y git
+          # amazon-linux-extras install nginx1.12
+          # printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" >/etc/systemd/system/nginx.service.d/override.conf
+          # systemctl enable --now nginx
+          useradd -rmU -d /opt/meteor meteor
+          export HOME="/root"
+          curl https://install.meteor.com/ | sh
+          wget -P /opt https://nodejs.org/dist/v12.14.0/node-v12.14.0-linux-x64.tar.gz
+          tar -xf /opt/node-v12.14.0-linux-x64.tar.gz -C /opt
+          mv /opt/node-v12.14.0-linux-x64 /opt/nodejs
+
+          mkdir -p /home/ec2-user/.ssh
+          cat <<-EOF > /home/ec2-user/.ssh/config
+          HOST github.com
+          User git
+          Hostname ssh.github.com
+          Port 443
+          IdentityFile /home/ec2-user/.ssh/ec2-archery
+          EOF
+
+          echo "[ssh.github.com]:443,[192.30.253.123]:443 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==" >/home/ec2-user/.ssh/known_hosts
+
+          aws s3 cp s3://jpmolinamatute-archery/ec2-archery /home/ec2-user/.ssh
+          chmod 600 /home/ec2-user/.ssh/config /home/ec2-user/.ssh/ec2-archery
+          chmod 644 /home/ec2-user/.ssh/known_hosts
+          chown -R ec2-user:ec2-user /home/ec2-user/.ssh
+
+          fallocate -l 1G /swapfile
+          dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+          chmod 600 /swapfile
+          mkswap /swapfile
+          swapon /swapfile
+          echo "/swapfile none    swap    sw    0   0" >>/etc/fstab
+
+          cat <<-EOF > /usr/lib/systemd/system/archery.service
+          [Unit]
+          Description=Archery Records
+
+          [Service]
+          Type=simple
+          User=meteor
+          Group=meteor
+          StandardOutput=journal
+          StandardError=journal
+          Environment="MONGO_URL=mongodb+srv://${MONGO}?retryWrites=true&w=majority" "ROOT_URL=http://archery-record.ca:3003" "PORT=3003" "PATH=/opt/nodejs/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+          ExecStart=/opt/nodejs/bin/node /opt/meteor/bundle/main.js
+
+          [Install]
+          WantedBy=multi-user.target
+          EOF
+
+          cat <<-EOF > /home/ec2-user/install.sh
+          #!/bin/bash
+
+          git clone git@github.com:jpmolinamatute/archery-record.ca.git
+          cd archery-record.ca
+          meteor npm install
+          meteor build --directory /home/ec2-user
+          sudo mv /home/ec2-user/bundle /opt/meteor
+          sudo chown -R meteor:meteor /opt/meteor/bundle
+          echo
+          echo
+          echo "sudo su -s /usr/bin/bash meteor"
+          echo "cd /opt/meteor/bundle/programs/server"
+          echo "export PATH=/opt/nodejs/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+          echo "npm install"
+          echo "exit"
+          echo "sudo systemctl enable --now archery.service"
+          echo "sudo systemctl status archery.service"
+          echo
+          echo
+          exit 0
+          EOF
+
+          chown ec2-user:ec2-user /home/ec2-user/install.sh
+          chmod 755 /home/ec2-user/install.sh
+
+          exit 0
+
+      SecurityGroupIds:
+        - !Ref sg
+      SubnetId: subnet-8dea43c1
+      Tags:
+        - Key: Name
+          Value: "Archery Server"
+  eip:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref ec2Instance11
+      Tags:
+        - Key: Name
+          Value: "Archery Server IP"
+
+  NifiDnsHost:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub "archery-record.ca"
+      Type: A
+      TTL: "60"
+      HostedZoneId: Z2E03IMZQ1CCVS
+      ResourceRecords:
+        - !Ref eip
