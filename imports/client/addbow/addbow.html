@@ -1,0 +1,24 @@
+<template name="addbow">
+    <div class="add-bow">
+        <div class="flex-col">
+            <label for="addbow-dweight">Bow drag weight</label>
+            <input id="addbow-dweight" type="number" class="form-control">
+        </div>
+        <div class="flex-col">
+            <label for="addbow-type">Bow type</label>
+            <select id="addbow-type">
+                <option value="olimpic">Olimpic Recurve</option>
+                <option value="barebow">Barebow Recurve</option>
+                <option value="compound">Compound</option>
+                <option value="traditional">Traditional</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addbow-comments">Comments</label>
+        <textarea name="" id="addbow-comments" cols="30" rows="10"></textarea>
+    </div>
+    <button type="button" id="addbow-save" class="btn" title="Add bow">
+        <i class="fas fa-plus"></i>
+    </button>
+</template>

@@ -2,7 +2,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 
 export const askSession = new ReactiveVar(true);
-export const templateToDisplay = new ReactiveVar('input');
+export const templateToDisplay = new ReactiveVar('welcome');
 
 function addZeroToDate(value) {
     return value < 10 ? `0${value}` : value;

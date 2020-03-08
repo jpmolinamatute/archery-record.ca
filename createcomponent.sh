@@ -17,8 +17,8 @@ if [[ -d "${base}/${path}" ]]; then
         echo "</template>" >>"${wholepath}/${component}.html"
         echo "Creating ${wholepath}/${component}.js"
         cat <<-EOF >"${wholepath}/${component}.js"
-import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 import './${component}.css';
 import './${component}.html';
 
@@ -29,6 +29,10 @@ Template.${component}.events({
 Template.${component}.helpers({
 
 });
+
+// Template.${component}.onCreated(function ${component}onCreated(){
+
+// });
 EOF
         echo "Creating ${wholepath}/${component}.css"
         touch "${wholepath}/${component}.css"

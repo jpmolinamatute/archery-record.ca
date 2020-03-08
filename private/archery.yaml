@@ -42,6 +42,7 @@ Resources:
           yum install -y git
           # amazon-linux-extras install nginx1.12
           # printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" >/etc/systemd/system/nginx.service.d/override.conf
+          # aws s3 cp s3://jpmolinamatute-archery/archery.conf /etc/nginx/conf
           # systemctl enable --now nginx
           useradd -rmU -d /opt/meteor meteor
           export HOME="/root"
